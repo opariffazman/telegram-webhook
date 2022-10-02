@@ -9,7 +9,7 @@ app.use(cors())
 const secretUrl = process.env.SECRET_URL
 app.post(`/${secretUrl}`, (req, res) => {
   console.log('webhook received')
-  res.send('webhook received' + JSON.parse(req.body)).end()
+  res.status(200).json('webhook received')
 })
 
 const port = process.env.PORT || 443 || 80 || 88 || 8443
