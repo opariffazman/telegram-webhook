@@ -33,9 +33,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const secretUrl = process.env.SECRET_URL
 app.post(`/${secretUrl}`, (req, res) => {
-  const chatJson = JSON.parse(req.body)
+  const chatJson = req.body
 
-  bot.telegram.sendMessage(chatJson.chat.id, 'hello there! Welcome to my new telegram bot.', {})
+  bot.telegram.sendMessage(chatJson.message.chat.id, 'hello there! Welcome to my new telegram bot.', {})
   console.log('webhook received')
   res.status(200).json('webhook received')
 })
