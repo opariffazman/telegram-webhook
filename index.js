@@ -1,33 +1,33 @@
-const { Telegraf } = require('telegraf')
 const express = require('express')
+const axios = require('axios')
+
+const { TOKEN, SERVER_URL } = process.env
+const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
+const URI = `/webhook/${TOKEN}`
+const WEBHOOK_URL = SERVER_URL + URI
+
 const app = express()
-
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const init = async () => {
+    const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`)
+    console.log(res.data)
+}
 
-app.post('/', (req, res) => {
-  const json = req.body
-  const chatId = json.message.chat.id
-  const text = json.message.text
+app.post(URI, async (req, res) => {
+    console.log(req.body)
 
-  if (text == 'hello') {
-    bot.telegram.sendMessage(chatId, 'hello', {})
+    const chatId = req.body.message.chat.id
+    const text = req.body.message.text
 
-  }
-
-  if (text == 'salam') {
-    bot.telegram.sendMessage(chatId, 'wasalam', {})
-  }
-
-  bot.telegram.sendMessage(chatId, 'yo', {})
-
-  console.log(`text: ${text} chatId: ${chatId} `)
-  res.status(200).json('webhook received')
+    await axios.post(`${TELEGRAM_API}/sendMessage`, {
+        chat_id: chatId,
+        text: text
+    })
+    return res.send()
 })
 
-const port = 8443 //|| 443 || 80 || 88 only ports for telegram
-app.listen(port, () => {
-  console.log(`telegram webhook listening on ${port}`)
+app.listen(process.env.PORT || 5000, async () => {
+    console.log('🚀 app running on port', process.env.PORT || 5000)
+    await init()
 })
