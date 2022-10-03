@@ -8,16 +8,16 @@ app.use(express.urlencoded({ extended: true }))
 const token = process.env.TOKEN
 const bot = new Telegraf(token)
 
-app.post(`/webhook/${token}`, (req, res) => {
-  const json = req.body
-  const chatId = json.message.chat.id
-  const text = json.message.text
+app.post(`/webhook/${token}`, async (req, res) => {
+  console.log(req.body)
 
+  const chatId = req.body.message.chat.id
+  const text = req.body.message.text
 
   bot.telegram.sendMessage(chatId, 'Welcome', {})
 
   console.log(`text: ${text} chatId: ${chatId} `)
-  res.status(200).json('webhook received')
+  return res.send()
 })
 
 const port = 8443 //|| 443 || 80 || 88 only ports for telegram
