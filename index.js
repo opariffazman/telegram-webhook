@@ -43,6 +43,12 @@ app.post(`/webhook/${token}`, async (req, res) => {
         text: 'Hi /pakej /semua'
       })
       return res.send()
+    default:
+      await axios.post(`${TELEGRAM_API}/sendMessage`, {
+        chat_id: chatId,
+        text: 'Fungsi tiada'
+      })
+      return res.send()
   }
 })
 
