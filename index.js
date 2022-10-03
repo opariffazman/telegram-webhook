@@ -19,9 +19,18 @@ app.post(`/webhook/${token}`, async (req, res) => {
     chat_id: chatId,
     text: 'Pilih Pakej',
     reply_markup: {
-        keyboard: [
-          'A','B','C'
+      keyboard: [
+        [
+          { text: 'A' },
+          { text: 'B' },
+          { text: 'C' },
+          { text: 'D' },
+          { text: 'E' },
+          { text: 'F' },
+          { text: 'J' },
+          { text: 'H' }
         ]
+      ]
     }
   })
 
