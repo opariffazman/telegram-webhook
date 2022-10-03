@@ -13,26 +13,38 @@ app.post(`/webhook/${token}`, async (req, res) => {
   console.log(req.body)
 
   const chatId = req.body.message.chat.id
-  const text = req.body.message.text
+  const command = req.body.message.text
 
-  await axios.post(`${TELEGRAM_API}/sendMessage`, {
-    chat_id: chatId,
-    text: 'Pilih Pakej',
-    reply_markup: {
-      keyboard: [
-        [
-          { text: 'A' },
-          { text: 'B' },
-          { text: 'C' },
-          { text: 'D' },
-          { text: 'E' },
-          { text: 'F' },
-          { text: 'J' },
-          { text: 'H' }
-        ]
-      ]
-    }
-  })
+  switch (command) {
+    case 'pakej':
+      await axios.post(`${TELEGRAM_API}/sendMessage`, {
+        chat_id: chatId,
+        text: 'Pilih Pakej',
+        reply_markup: {
+          keyboard: [
+            [
+              { text: 'A' },
+              { text: 'B' },
+              { text: 'C' },
+              { text: 'D' },
+              { text: 'E' },
+              { text: 'F' },
+              { text: 'J' },
+              { text: 'H' }
+            ]
+          ]
+        }
+      })
+      break
+
+    default:
+      await axios.post(`${TELEGRAM_API}/sendMessage`, {
+        chat_id: chatId,
+        text: 'Hi /pakej'
+      })
+      break
+  }
+
 
   console.log(`text: ${text} chatId: ${chatId} `)
   return res.send()
