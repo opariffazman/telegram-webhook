@@ -14,6 +14,7 @@ app.post(`/webhook/${token}`, async (req, res) => {
 
   const chatId = req.body.message.chat.id
   const command = req.body.message.text
+  console.log(`command: ${command} chatId: ${chatId} `)
 
   switch (command) {
     case 'pakej':
@@ -35,19 +36,14 @@ app.post(`/webhook/${token}`, async (req, res) => {
           ]
         }
       })
-      break
-
+      return res.send()
     default:
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
-        text: 'Hi /pakej'
+        text: 'Hi /pakej /semua'
       })
-      break
+      return res.send()
   }
-
-
-  console.log(`text: ${text} chatId: ${chatId} `)
-  return res.send()
 })
 
 const port = 8443 //|| 443 || 80 || 88 only ports for telegram
