@@ -7,7 +7,8 @@ app.use(express.urlencoded({ extended: true }))
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const botFunctions = (chat) => {
+app.post('/', (req, res) => {
+  const chat = req.body
   const id = chat.message.id
   const text = chat.message.text
   if (text == 'hello') {
@@ -17,11 +18,6 @@ const botFunctions = (chat) => {
   if (text == 'salam') {
     bot.telegram.sendMessage(id, 'wasalam', {})
   }
-
-}
-
-app.post('/', (req, res) => {
-  botFunctions(req.body)
 
   console.log('webhook received')
   res.status(200).json('webhook received')
