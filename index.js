@@ -9,21 +9,21 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 
 app.post('/', (req, res) => {
   const json = req.body
-  const id = json.message.chat.id
+  const chatId = json.message.chat.id
   const text = json.message.text
 
   if (text == 'hello') {
-    bot.telegram.sendMessage(id, 'hello', {})
+    bot.telegram.sendMessage(chatId, 'hello', {})
 
   }
 
   if (text == 'salam') {
-    bot.telegram.sendMessage(id, 'wasalam', {})
+    bot.telegram.sendMessage(chatId, 'wasalam', {})
   }
 
-  bot.telegram.sendMessage(id, 'yo', {})
+  bot.telegram.sendMessage(chatId, 'yo', {})
 
-  console.log(`text: ${text} id: ${id} `)
+  console.log(`text: ${text} chatId: ${chatId} `)
   res.status(200).json('webhook received')
 })
 
