@@ -67,7 +67,18 @@ app.post(`/webhook/${token}`, async (req, res) => {
       })
       break
     case 'A':
-      sendInvoice(chatId, command)
+      await axios.post(`${TELEGRAM_API}/sendInvoice`, {
+        chat_id: chatId,
+        title: `pakej ${command}`,
+        description: 'skema markah',
+        payload: 'pay',
+        provider_token: provider_token,
+        currency: 'MYR',
+        prices: [{
+          label: "Harga",
+          amount: 10
+        }]
+      })
       break
     default:
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
