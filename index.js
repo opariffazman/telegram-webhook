@@ -7,6 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const token = process.env.TOKEN
+const TELEGRAM_API = `https://api.telegram.org/bot${token}`
 
 app.post(`/webhook/${token}`, async (req, res) => {
   console.log(req.body)
