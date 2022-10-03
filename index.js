@@ -8,14 +8,12 @@ app.use(express.urlencoded({ extended: true }))
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 // Set the bot API endpoint
-app.use(await bot.createWebhook({ domain: 'https://webhook.cyclic.app' }));
-
 bot.on("text", ctx => ctx.reply("Hello"));
 
 app.post('/', (req, res) => {
   const chatJson = req.body
 
-  // bot.telegram.sendMessage(chatJson.message.chat.id, 'test', {})
+  bot.telegram.sendMessage(chatJson.message.chat.id, 'test', {})
   console.log('webhook received')
   res.status(200).json('webhook received')
 })
