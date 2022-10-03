@@ -7,7 +7,23 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const token = process.env.TOKEN
+const provider_token = process.env.PROVIDER_TOKEN
 const TELEGRAM_API = `https://api.telegram.org/bot${token}`
+
+async function sendInvoice(letter) {
+  await axios.post(`${TELEGRAM_API}/sendInvoice`, {
+    chat_id: chatId,
+    title: 'pakej a',
+    description: 'skema markah',
+    payload: 'pay',
+    provider_token: provider_token,
+    currency: 'MYR',
+    prices: [{
+      label: "Harga",
+      amount: 10
+    }]
+  })
+}
 
 app.post(`/webhook/${token}`, async (req, res) => {
   console.log(req.body)
@@ -36,27 +52,31 @@ app.post(`/webhook/${token}`, async (req, res) => {
           ]
         }
       })
-      return res.send()
+      break
     case '/lihat':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: '*Lihat Pakej*',
         parse_mode: 'MarkdownV2'
       })
-      return res.send()
+      break
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Hi /pakej /lihat'
       })
-      return res.send()
+      break
+    case 'A':
+      sendInvoice('A')
     default:
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Fungsi tiada'
       })
-      return res.send()
+      break
   }
+
+  return res.send()
 })
 
 const port = 8443 //|| 443 || 80 || 88 only ports for telegram
