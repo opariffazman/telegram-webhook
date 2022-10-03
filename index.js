@@ -1,13 +1,14 @@
-const {Telegraf} = require('telegraf')
+const { Telegraf } = require('telegraf')
 const express = require('express')
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const bot = new Telegraf(process.env.TOKEN)
+const token = process.env.TOKEN
+const bot = new Telegraf(token)
 
-app.post('/', (req, res) => {
+app.post(`/webhook/token`, (req, res) => {
   const json = req.body
   const chatId = json.message.chat.id
   const text = json.message.text
