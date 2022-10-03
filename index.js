@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
   res.status(200).json('webhook received')
 })
 
-const port = 443 || 80 || 88 || 8443 // only ports for telegram webhooks
+const port = 8443 // only ports for telegram webhooks
 app.listen(port, () => {
   console.log(`telegram webhook listening on ${port}`)
 })
