@@ -7,8 +7,8 @@ app.use(express.urlencoded({ extended: true }))
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-app.post('/', (req, res) => {
-  const json = req.body
+const botFunctions = (reqBody) => {
+  const json = reqBody
   const chatId = json.message.chat.id
   const text = json.message.text
 
@@ -24,10 +24,14 @@ app.post('/', (req, res) => {
   bot.telegram.sendMessage(chatId, 'yo', {})
 
   console.log(`text: ${text} chatId: ${chatId} `)
+}
+
+app.post('/', (req, res) => {
+  botFunctions(req.body)
   res.status(200).json('webhook received')
 })
 
-const port = 8443
+const port = 443 || 80 || 88 || 8443 // only ports for telegram webhooks
 app.listen(port, () => {
   console.log(`telegram webhook listening on ${port}`)
 })
