@@ -13,14 +13,8 @@ app.post(`/webhook/${token}`, (req, res) => {
   const chatId = json.message.chat.id
   const text = json.message.text
 
-  if (text == 'hello') {
-    bot.telegram.sendMessage(chatId, 'hello', {})
 
-  }
-
-  if (text == 'salam') {
-    bot.telegram.sendMessage(chatId, 'wasalam', {})
-  }
+  bot.telegram.sendMessage(chatId, 'Welcome', {})
 
   console.log(`text: ${text} chatId: ${chatId} `)
   res.status(200).json('webhook received')
