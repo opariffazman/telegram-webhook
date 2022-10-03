@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 const token = process.env.TOKEN
 const bot = new Telegraf(token)
 
-app.post(`/webhook/token`, (req, res) => {
+app.post(`/webhook/${token}`, (req, res) => {
   const json = req.body
   const chatId = json.message.chat.id
   const text = json.message.text
