@@ -27,7 +27,7 @@ app.post('/', (req, res) => {
   res.status(200).json('webhook received')
 })
 
-const port = process.env.PORT || 443 || 80 || 88 || 8443
+const port = 8443
 app.listen(port, () => {
-  console.log(`webhook listening on ${port}`)
+  console.log(`telegram webhook listening on ${port}`)
 })
