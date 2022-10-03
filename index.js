@@ -17,7 +17,7 @@ app.post(`/webhook/${token}`, async (req, res) => {
   console.log(`command: ${command} chatId: ${chatId} `)
 
   switch (command) {
-    case 'pakej':
+    case '/pakej':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Pilih Pakej',
@@ -37,7 +37,7 @@ app.post(`/webhook/${token}`, async (req, res) => {
         }
       })
       return res.send()
-    default:
+    case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Hi /pakej /semua'
