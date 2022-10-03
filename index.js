@@ -1,3 +1,4 @@
+const {Telegraf} = require('telegraf')
 const express = require('express')
 const app = express()
 
