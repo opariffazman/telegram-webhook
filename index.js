@@ -11,6 +11,8 @@ const provider_token = process.env.PROVIDER_TOKEN
 const TELEGRAM_API = `https://api.telegram.org/bot${token}`
 
 async function sendInvoice(chatId, command) {
+  console.log(`sendInvoice command: ${command} chatId: ${chatId} `)
+
   await axios.post(`${TELEGRAM_API}/sendInvoice`, {
     chat_id: chatId,
     title: `pakej ${command}`,
@@ -26,11 +28,9 @@ async function sendInvoice(chatId, command) {
 }
 
 app.post(`/webhook/${token}`, async (req, res) => {
-  console.log(req.body)
-
   const chatId = req.body.message.chat.id
   const command = req.body.message.text
-  console.log(`command: ${command} chatId: ${chatId} `)
+  console.log(`webhooked command: ${command} chatId: ${chatId} `)
 
   switch (command) {
     case '/pakej':
