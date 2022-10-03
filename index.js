@@ -7,8 +7,7 @@ app.use(express.urlencoded({ extended: true }))
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const botFunctions = (reqBody) => {
-  const json = reqBody
+const botFunctions = (json) => {
   const chatId = json.message.chat.id
   const text = json.message.text
 
