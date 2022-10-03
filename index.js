@@ -27,7 +27,8 @@ app.post(URI, async (req, res) => {
     return res.send()
 })
 
-app.listen(8443, async () => {
-    console.log('🚀 app running on port', 8443)
+const port = 8443
+app.listen(port, async () => {
+    console.log('🚀 app running on port', port)
     await init()
 })
