@@ -12,18 +12,9 @@ app.post('/', (req, res) => {
   const id = chat.message.id
   const text = chat.message.text
 
-  if (text == 'hello') {
-    bot.telegram.sendMessage(id, 'hello', {})
-
-  }
-
-  if (text == 'salam') {
-    bot.telegram.sendMessage(id, 'wasalam', {})
-  }
-
   bot.telegram.sendMessage(id, 'yo', {})
 
-  console.log(`webhook received ${text}`)
+  console.log(`text: ${text} id: ${id}`)
   res.status(200).json('webhook received')
 })
 
