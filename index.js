@@ -27,7 +27,7 @@ app.post(URI, async (req, res) => {
     return res.send()
 })
 
-app.listen(process.env.PORT || 5000, async () => {
-    console.log('🚀 app running on port', process.env.PORT || 5000)
+app.listen(8443, async () => {
+    console.log('🚀 app running on port', 8443)
     await init()
 })
