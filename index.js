@@ -18,7 +18,7 @@ async function sendInvoice(chatId) {
     title: `pakej`,
     description: 'skema markah',
     payload: 'pay',
-    provider_token: provider_token,
+    provider_token: '284685063:TEST:NzA2M2JjMDUwNGQ2',
     currency: 'MYR',
     prices: [
       [
