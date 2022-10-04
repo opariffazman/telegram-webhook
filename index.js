@@ -15,7 +15,7 @@ async function sendInvoice(chatId) {
 
   await axios.post(`${TELEGRAM_API}/sendInvoice`, {
     chat_id: chatId,
-    title: `pakej`,
+    title: 'pakej',
     description: 'skema markah',
     payload: 'pay',
     provider_token: '284685063:TEST:NzA2M2JjMDUwNGQ2',
