@@ -37,7 +37,7 @@ app.post(`/webhook/${token}`, async (req, res) => {
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
-        text: `Hi ${username}`,
+        text: 'Selamat datang',
         reply_markup: {
           keyboard: [
             [
