@@ -51,20 +51,23 @@ app.post(`/webhook/${token}`, async (req, res) => {
             ]
           ]
         }
-      })
+      }).then(res => { console.log(res.data) })
+        .catch(err => { console.error(err) })
       break
     case '/lihat':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: '*Lihat Pakej*',
         parse_mode: 'MarkdownV2'
-      })
+      }).then(res => { console.log(res.data) })
+        .catch(err => { console.error(err) })
       break
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Hi /pakej /lihat'
-      })
+      }).then(res => { console.log(res.data) })
+        .catch(err => { console.error(err) })
       break
     case 'A':
       await axios.post(`${TELEGRAM_API}/sendInvoice`, {
@@ -78,13 +81,15 @@ app.post(`/webhook/${token}`, async (req, res) => {
           label: "Harga",
           amount: 10
         }]
-      })
+      }).then(res => { console.log(res.data) })
+        .catch(err => { console.error(err) })
       break
     default:
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Fungsi tiada'
-      })
+      }).then(res => { console.log(res.data) })
+        .catch(err => { console.error(err) })
       break
   }
 
