@@ -43,7 +43,7 @@ app.post(`/webhook/${token}`, async (req, res) => {
             [
               {
                 text: 'Lihat Semua Pakej',
-                web_app: 'https://opariffazman.github.io/telegram-web-app/'
+                web_app: { url: 'https://opariffazman.github.io/telegram-web-app/' }
               }
             ]
           ]
