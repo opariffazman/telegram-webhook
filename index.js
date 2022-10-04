@@ -33,54 +33,10 @@ app.post(`/webhook/${token}`, async (req, res) => {
   console.log(`webhooked command: ${command} chatId: ${chatId} `)
 
   switch (command) {
-    case '/pakej':
-      await axios.post(`${TELEGRAM_API}/sendMessage`, {
-        chat_id: chatId,
-        text: 'Pilih Pakej',
-        reply_markup: {
-          keyboard: [
-            [
-              { text: 'A' },
-              { text: 'B' },
-              { text: 'C' },
-              { text: 'D' },
-              { text: 'E' },
-              { text: 'F' },
-              { text: 'J' },
-              { text: 'H' }
-            ]
-          ]
-        }
-      }).then(res => { console.log(res.data) })
-        .catch(err => { console.error(err) })
-      break
-    case '/lihat':
-      await axios.post(`${TELEGRAM_API}/sendMessage`, {
-        chat_id: chatId,
-        text: '*Lihat Pakej*',
-        parse_mode: 'MarkdownV2'
-      }).then(res => { console.log(res.data) })
-        .catch(err => { console.error(err) })
-      break
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
         text: 'Hi /pakej /lihat'
-      }).then(res => { console.log(res.data) })
-        .catch(err => { console.error(err) })
-      break
-    case 'A':
-      await axios.post(`${TELEGRAM_API}/sendInvoice`, {
-        chat_id: chatId,
-        title: `pakej ${command}`,
-        description: 'skema markah',
-        payload: 'pay',
-        provider_token: provider_token,
-        currency: 'MYR',
-        prices: [{
-          label: "Harga",
-          amount: 10
-        }]
       }).then(res => { console.log(res.data) })
         .catch(err => { console.error(err) })
       break
