@@ -40,10 +40,12 @@ app.post(`/webhook/${token}`, async (req, res) => {
         text: `Hi ${username}`,
         reply_markup: {
           keyboard: [
-            {
-              text: 'Lihat Semua Pakej',
-              web_app: 'https://opariffazman.github.io/telegram-web-app/'
-            },
+            [
+              {
+                text: 'Lihat Semua Pakej',
+                web_app: 'https://opariffazman.github.io/telegram-web-app/'
+              }
+            ]
           ]
         }
       }).then(res => { console.log(res.data) })
