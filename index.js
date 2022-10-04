@@ -10,20 +10,24 @@ const token = process.env.TOKEN
 const provider_token = process.env.PROVIDER_TOKEN
 const TELEGRAM_API = `https://api.telegram.org/bot${token}`
 
-async function sendInvoice(chatId, command) {
-  console.log(`sendInvoice command: ${command} chatId: ${chatId} `)
+async function sendInvoice(chatId) {
+  console.log(`sendInvoice chatId: ${chatId} `)
 
   await axios.post(`${TELEGRAM_API}/sendInvoice`, {
     chat_id: chatId,
-    title: `pakej ${command}`,
+    title: `pakej`,
     description: 'skema markah',
     payload: 'pay',
     provider_token: provider_token,
     currency: 'MYR',
-    prices: [{
-      label: "Harga",
-      amount: 10
-    }]
+    prices: [
+      [
+        {
+          label: "Harga",
+          amount: 10
+        }
+      ]
+    ]
   })
 }
 
@@ -50,6 +54,9 @@ app.post(`/webhook/${token}`, async (req, res) => {
         }
       }).then(res => { console.log(res.data) })
         .catch(err => { console.error(err) })
+      break
+    case '/invoice':
+      sendInvoice(chatId)
       break
     default:
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
