@@ -29,14 +29,15 @@ async function sendInvoice(chatId, command) {
 
 app.post(`/webhook/${token}`, async (req, res) => {
   const chatId = req.body.message.chat.id
+  const username = req.body.message.chat.first_name
   const command = req.body.message.text
-  console.log(`webhooked command: ${command} chatId: ${chatId} `)
+  console.log(`webhooked command: ${command} chatId: ${chatId} username: ${username} `)
 
   switch (command) {
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
-        text: 'Hi /pakej /lihat'
+        text: `Hi ${username}`
       }).then(res => { console.log(res.data) })
         .catch(err => { console.error(err) })
       break
