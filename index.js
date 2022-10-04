@@ -37,7 +37,15 @@ app.post(`/webhook/${token}`, async (req, res) => {
     case '/start':
       await axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
-        text: `Hi ${username}`
+        text: `Hi ${username}`,
+        reply_markup: {
+          keyboard: [
+            {
+              text: 'Lihat Semua Pakej',
+              web_app: 'https://opariffazman.github.io/telegram-web-app/'
+            },
+          ]
+        }
       }).then(res => { console.log(res.data) })
         .catch(err => { console.error(err) })
       break
