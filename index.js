@@ -28,7 +28,8 @@ async function sendInvoice(chatId) {
         }
       ]
     ]
-  })
+  }).then(res => { console.log(res.data) })
+    .catch(err => { console.error(err) })
 }
 
 app.post(`/webhook/${token}`, async (req, res) => {
