@@ -23,7 +23,7 @@ async function sendInvoice(chatId) {
     prices: [
       [
         {
-          label: "Harga",
+          label: 'Harga',
           amount: 10
         }
       ]
